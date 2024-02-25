@@ -1,30 +1,20 @@
-<template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
-</template>
+<script setup>
+import { ref } from "vue";
+import buttonVue from "./components/button.vue";
 
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+let isError = ref(false); // 主题
+let isFlat = ref(false); // 阴影
+let btnText = ref("普通按钮"); // 按钮文本
 </script>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+<template>
+  主题：<input type="checkbox" v-model="isError" /> 阴影：<input
+    type="checkbox"
+    v-model="isFlat"
+  />
+  按钮文本：<input type="text" v-model="btnText" />
+  <hr />
+  <!-- 父向子传值，可采用属性的方式赋值 -->
+  <buttonVue :title="btnText" :error="isError" :flat="isFlat" />
+  <el-button>是</el-button>
+</template>
